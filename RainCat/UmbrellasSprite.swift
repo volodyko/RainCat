@@ -18,6 +18,8 @@ public class UmbrellaSprite : SKSpriteNode {
 	public static func newInstance() -> UmbrellaSprite {
 		let umbrella = UmbrellaSprite(imageNamed: "umbrella")
 		
+		umbrella.zPosition = 1
+		
 		let path = UIBezierPath()
 		path.move(to: CGPoint())
 		path.addLine(to: CGPoint(x: -umbrella.size.width / 2 - 15, y: 0))

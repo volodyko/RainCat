@@ -15,6 +15,7 @@
 		0D8602BC1F448C51009536EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D8602BA1F448C51009536EC /* LaunchScreen.storyboard */; };
 		0D8602C51F449648009536EC /* UmbrellasSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8602C41F449648009536EC /* UmbrellasSprite.swift */; };
 		0D8602C71F458D22009536EC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8602C61F458D22009536EC /* Constants.swift */; };
+		0D86031B1F45D0C7009536EC /* CatSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D86031A1F45D0C7009536EC /* CatSprite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		0D8602BD1F448C51009536EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D8602C41F449648009536EC /* UmbrellasSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UmbrellasSprite.swift; sourceTree = "<group>"; };
 		0D8602C61F458D22009536EC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0D86031A1F45D0C7009536EC /* CatSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatSprite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				0D8602C41F449648009536EC /* UmbrellasSprite.swift */,
+				0D86031A1F45D0C7009536EC /* CatSprite.swift */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 				0D8602C71F458D22009536EC /* Constants.swift in Sources */,
 				0D8602B21F448C51009536EC /* GameScene.swift in Sources */,
 				0D8602B41F448C51009536EC /* GameViewController.swift in Sources */,
+				0D86031B1F45D0C7009536EC /* CatSprite.swift in Sources */,
 				0D8602C51F449648009536EC /* UmbrellasSprite.swift in Sources */,
 				0D8602AC1F448C51009536EC /* AppDelegate.swift in Sources */,
 			);

@@ -15,6 +15,8 @@ class GameScene: SKScene {
 	private var raindropSpawnRate : TimeInterval = 0.2
 	private let random = GKARC4RandomSource()
 	private let umbrella = UmbrellaSprite.newInstance()
+	private let reinDropTexture = SKTexture(imageNamed: "rain_drop")
+	private var cat : CatSprite!
 	
 	override func sceneDidLoad() {
 		
@@ -32,7 +34,7 @@ class GameScene: SKScene {
 		
 		
 		let floorNode = SKShapeNode(rectOf: CGSize(width: size.width, height: 5))
-		floorNode.position = CGPoint(x: size.width / 2, y: 50)
+		floorNode.position = CGPoint(x: size.width / 2, y: 25)
 		floorNode.fillColor = SKColor.red
 		
 		floorNode.physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: -size.width / 2, y: 0), to: CGPoint(x: size.width, y: 0))
@@ -44,6 +46,13 @@ class GameScene: SKScene {
 		umbrella.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
 		
 		addChild(umbrella);
+		
+		spawnCat();
+		
+		let background = SKSpriteNode(imageNamed: "background")
+		background.position = CGPoint(x: frame.midX, y: frame.midY)
+		background.zPosition = 0
+		addChild(background)
 	}
 	
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -82,11 +91,11 @@ class GameScene: SKScene {
 	}
 	
 	func spawnRaindrop() {
-		let rainDrop = SKShapeNode(rectOf: CGSize(width: 10, height: 10))
+		let rainDrop = SKSpriteNode(texture: reinDropTexture)
 		rainDrop.position = CGPoint(x: size.width / 2, y: size.height / 2)
-		rainDrop.fillColor = SKColor.blue
+		rainDrop.zPosition = 2
 		
-		rainDrop.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10))
+		rainDrop.physicsBody = SKPhysicsBody(rectangleOf: rainDrop.size)
 		rainDrop.physicsBody?.categoryBitMask = RainDropCategory
 		rainDrop.physicsBody?.contactTestBitMask = WorldFrameCategory
 		
@@ -94,7 +103,18 @@ class GameScene: SKScene {
 		rainDrop.position = CGPoint(x: randomPosition, y: size.height)
 		
 		addChild(rainDrop)
-
+	}
+	
+	func spawnCat() {
+		if let currentCat = cat, children.contains(currentCat) {
+			cat.removeFromParent()
+			cat.removeAllActions()
+			cat.physicsBody = nil
+		}
+		
+		cat = CatSprite.newInstance()
+		cat.position = CGPoint(x: umbrella.position.x, y: umbrella.position.y - 15)
+		addChild(cat)
 	}
 }
 
@@ -107,6 +127,11 @@ extension GameScene : SKPhysicsContactDelegate {
 			contact.bodyB.node?.physicsBody?.collisionBitMask = 0
 		}
 		
+		if contact.bodyA.categoryBitMask == CatCategory || contact.bodyB.categoryBitMask == CatCategory {
+			handleCatCollision(contact: contact)
+			return
+		}
+		
 		if contact.bodyA.categoryBitMask == WorldFrameCategory {
 			contact.bodyB.node?.removeFromParent()
 			contact.bodyB.node?.physicsBody = nil
@@ -115,6 +140,25 @@ extension GameScene : SKPhysicsContactDelegate {
 			contact.bodyA.node?.removeFromParent()
 			contact.bodyA.node?.physicsBody = nil
 			contact.bodyA.node?.removeAllActions()
+		}
+	}
+	
+	func handleCatCollision(contact: SKPhysicsContact) {
+		var otherBody : SKPhysicsBody
+		
+		if(contact.bodyA.categoryBitMask == CatCategory) {
+			otherBody = contact.bodyB
+		} else {
+			otherBody = contact.bodyA
+		}
+		
+		switch otherBody.categoryBitMask {
+		case RainDropCategory:
+			print("rain hit cat")
+		case WorldFrameCategory:
+			spawnCat()
+		default:
+			print("something hit cat")
 		}
 	}
 }
