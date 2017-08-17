@@ -16,6 +16,7 @@
 		0D8602C51F449648009536EC /* UmbrellasSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8602C41F449648009536EC /* UmbrellasSprite.swift */; };
 		0D8602C71F458D22009536EC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8602C61F458D22009536EC /* Constants.swift */; };
 		0D86031B1F45D0C7009536EC /* CatSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D86031A1F45D0C7009536EC /* CatSprite.swift */; };
+		0D86031D1F45E5C4009536EC /* FoodSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D86031C1F45E5C4009536EC /* FoodSprite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		0D8602C41F449648009536EC /* UmbrellasSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UmbrellasSprite.swift; sourceTree = "<group>"; };
 		0D8602C61F458D22009536EC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0D86031A1F45D0C7009536EC /* CatSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatSprite.swift; sourceTree = "<group>"; };
+		0D86031C1F45E5C4009536EC /* FoodSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodSprite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			children = (
 				0D8602C41F449648009536EC /* UmbrellasSprite.swift */,
 				0D86031A1F45D0C7009536EC /* CatSprite.swift */,
+				0D86031C1F45E5C4009536EC /* FoodSprite.swift */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 				0D8602C71F458D22009536EC /* Constants.swift in Sources */,
 				0D8602B21F448C51009536EC /* GameScene.swift in Sources */,
 				0D8602B41F448C51009536EC /* GameViewController.swift in Sources */,
+				0D86031D1F45E5C4009536EC /* FoodSprite.swift in Sources */,
 				0D86031B1F45D0C7009536EC /* CatSprite.swift in Sources */,
 				0D8602C51F449648009536EC /* UmbrellasSprite.swift in Sources */,
 				0D8602AC1F448C51009536EC /* AppDelegate.swift in Sources */,

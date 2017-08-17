@@ -12,11 +12,13 @@ import GameplayKit
 class GameScene: SKScene {
 	private var lastUpdateTime : TimeInterval = 0
 	private var currentRainDropSpawnTime : TimeInterval = 0
-	private var raindropSpawnRate : TimeInterval = 0.2
+	private var raindropSpawnRate : TimeInterval = 0.5
 	private let random = GKARC4RandomSource()
 	private let umbrella = UmbrellaSprite.newInstance()
 	private let reinDropTexture = SKTexture(imageNamed: "rain_drop")
 	private var cat : CatSprite!
+	private let foodEdgeMargin : CGFloat = 75.0
+	private var food : FoodSprite!
 	
 	override func sceneDidLoad() {
 		
@@ -45,9 +47,10 @@ class GameScene: SKScene {
 		
 		umbrella.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
 		
-		addChild(umbrella);
+		addChild(umbrella)
 		
-		spawnCat();
+		spawnCat()
+		spawFood()
 		
 		let background = SKSpriteNode(imageNamed: "background")
 		background.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -82,6 +85,8 @@ class GameScene: SKScene {
 		
 		umbrella.update(deltaTime: dt)
 		
+		cat.update(deltaTime: dt, foodLocation: food.position)
+		
 		currentRainDropSpawnTime += dt
 		
 		if(currentRainDropSpawnTime > raindropSpawnRate) {
@@ -98,6 +103,7 @@ class GameScene: SKScene {
 		rainDrop.physicsBody = SKPhysicsBody(rectangleOf: rainDrop.size)
 		rainDrop.physicsBody?.categoryBitMask = RainDropCategory
 		rainDrop.physicsBody?.contactTestBitMask = WorldFrameCategory
+		rainDrop.physicsBody?.density = 0.5
 		
 		let randomPosition = abs(CGFloat(random.nextInt()).truncatingRemainder(dividingBy: size.width))
 		rainDrop.position = CGPoint(x: randomPosition, y: size.height)
@@ -116,6 +122,22 @@ class GameScene: SKScene {
 		cat.position = CGPoint(x: umbrella.position.x, y: umbrella.position.y - 15)
 		addChild(cat)
 	}
+	
+	func spawFood() {
+		food = FoodSprite.newInstance()
+		var randomPosition : CGFloat = CGFloat(random.nextInt())
+		randomPosition = randomPosition.truncatingRemainder(dividingBy: size.width - foodEdgeMargin * 2)
+		randomPosition = CGFloat(abs(randomPosition))
+		randomPosition += foodEdgeMargin
+		
+		food.position = CGPoint(x: randomPosition, y: size.height)
+		
+		addChild(food)
+	}
+	
+	func stuneCat() {
+		cat.hitByRain()
+	}
 }
 
 extension GameScene : SKPhysicsContactDelegate {
@@ -125,6 +147,11 @@ extension GameScene : SKPhysicsContactDelegate {
 			contact.bodyA.node?.physicsBody?.collisionBitMask = 0
 		} else if (contact.bodyB.categoryBitMask == RainDropCategory) {
 			contact.bodyB.node?.physicsBody?.collisionBitMask = 0
+		}
+		
+		if contact.bodyA.categoryBitMask == FoodCategory || contact.bodyB.categoryBitMask == FoodCategory {
+			handleFoodHit(contact: contact)
+			return
 		}
 		
 		if contact.bodyA.categoryBitMask == CatCategory || contact.bodyB.categoryBitMask == CatCategory {
@@ -154,11 +181,37 @@ extension GameScene : SKPhysicsContactDelegate {
 		
 		switch otherBody.categoryBitMask {
 		case RainDropCategory:
-			print("rain hit cat")
+			stuneCat()
 		case WorldFrameCategory:
 			spawnCat()
 		default:
 			print("something hit cat")
+		}
+	}
+	
+	func handleFoodHit(contact: SKPhysicsContact) {
+		var otherBody : SKPhysicsBody
+		var foodBody : SKPhysicsBody
+		
+		if(contact.bodyA.categoryBitMask == FoodCategory) {
+			otherBody = contact.bodyB
+			foodBody = contact.bodyA
+		} else {
+			otherBody = contact.bodyA
+			foodBody = contact.bodyB
+		}
+		
+		switch otherBody.categoryBitMask {
+		case CatCategory:
+			print("feed")
+			fallthrough
+		case WorldFrameCategory:
+			foodBody.node?.removeFromParent()
+			foodBody.node?.physicsBody = nil
+
+			spawFood()
+		default:
+			print("something else touched the food")
 		}
 	}
 }
