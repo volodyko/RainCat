@@ -17,6 +17,8 @@ class GameViewController: UIViewController {
 		
 		let scene = GameScene(size: view.frame.size)
 		
+		SoundManager.sharedInstance.startPlaying()
+		
 		// Present the scene
 		if let view = self.view as! SKView? {
 			view.presentScene(scene)

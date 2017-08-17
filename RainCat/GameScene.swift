@@ -12,7 +12,7 @@ import GameplayKit
 class GameScene: SKScene {
 	private var lastUpdateTime : TimeInterval = 0
 	private var currentRainDropSpawnTime : TimeInterval = 0
-	private var raindropSpawnRate : TimeInterval = 0.5
+	private var raindropSpawnRate : TimeInterval = 1
 	private let random = GKARC4RandomSource()
 	private let umbrella = UmbrellaSprite.newInstance()
 	private let reinDropTexture = SKTexture(imageNamed: "rain_drop")
@@ -138,6 +138,12 @@ class GameScene: SKScene {
 	func stuneCat() {
 		cat.hitByRain()
 	}
+	
+	func increaseRaindropRate() {
+		if(raindropSpawnRate > 0) {
+			raindropSpawnRate -= 0.01
+		}
+	}
 }
 
 extension GameScene : SKPhysicsContactDelegate {
@@ -204,6 +210,7 @@ extension GameScene : SKPhysicsContactDelegate {
 		switch otherBody.categoryBitMask {
 		case CatCategory:
 			print("feed")
+			increaseRaindropRate()
 			fallthrough
 		case WorldFrameCategory:
 			foodBody.node?.removeFromParent()
