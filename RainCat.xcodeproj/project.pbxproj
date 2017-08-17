@@ -13,6 +13,8 @@
 		0D8602B71F448C51009536EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D8602B51F448C51009536EC /* Main.storyboard */; };
 		0D8602B91F448C51009536EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D8602B81F448C51009536EC /* Assets.xcassets */; };
 		0D8602BC1F448C51009536EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D8602BA1F448C51009536EC /* LaunchScreen.storyboard */; };
+		0D8602C51F449648009536EC /* UmbrellasSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8602C41F449648009536EC /* UmbrellasSprite.swift */; };
+		0D8602C71F458D22009536EC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8602C61F458D22009536EC /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		0D8602B81F448C51009536EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D8602BB1F448C51009536EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D8602BD1F448C51009536EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D8602C41F449648009536EC /* UmbrellasSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UmbrellasSprite.swift; sourceTree = "<group>"; };
+		0D8602C61F458D22009536EC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		0D8602AA1F448C51009536EC /* RainCat */ = {
 			isa = PBXGroup;
 			children = (
+				0D8602C31F449638009536EC /* Sprites */,
 				0D8602AB1F448C51009536EC /* AppDelegate.swift */,
 				0D8602B11F448C51009536EC /* GameScene.swift */,
 				0D8602B31F448C51009536EC /* GameViewController.swift */,
@@ -63,8 +68,17 @@
 				0D8602B81F448C51009536EC /* Assets.xcassets */,
 				0D8602BA1F448C51009536EC /* LaunchScreen.storyboard */,
 				0D8602BD1F448C51009536EC /* Info.plist */,
+				0D8602C61F458D22009536EC /* Constants.swift */,
 			);
 			path = RainCat;
+			sourceTree = "<group>";
+		};
+		0D8602C31F449638009536EC /* Sprites */ = {
+			isa = PBXGroup;
+			children = (
+				0D8602C41F449648009536EC /* UmbrellasSprite.swift */,
+			);
+			name = Sprites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +153,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D8602C71F458D22009536EC /* Constants.swift in Sources */,
 				0D8602B21F448C51009536EC /* GameScene.swift in Sources */,
 				0D8602B41F448C51009536EC /* GameViewController.swift in Sources */,
+				0D8602C51F449648009536EC /* UmbrellasSprite.swift in Sources */,
 				0D8602AC1F448C51009536EC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
